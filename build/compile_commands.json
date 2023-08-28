@@ -7,9 +7,9 @@
 },
 {
   "directory": "/home/mehdi/linearC/build",
-  "command": "/usr/bin/g++  -isystem /home/mehdi/linearC/build/_deps/googletest-src/googletest/include -isystem /home/mehdi/linearC/build/_deps/googletest-src/googletest -g -o CMakeFiles/test_monotype_matrix.dir/test_monotype_matrix.cpp.o -c /home/mehdi/linearC/test_monotype_matrix.cpp",
-  "file": "/home/mehdi/linearC/test_monotype_matrix.cpp",
-  "output": "CMakeFiles/test_monotype_matrix.dir/test_monotype_matrix.cpp.o"
+  "command": "/usr/bin/g++  -isystem /home/mehdi/linearC/build/_deps/googletest-src/googletest/include -isystem /home/mehdi/linearC/build/_deps/googletest-src/googletest -g -o CMakeFiles/test_row_major_double_matrix.dir/test_row_major_double_matrix.cpp.o -c /home/mehdi/linearC/test_row_major_double_matrix.cpp",
+  "file": "/home/mehdi/linearC/test_row_major_double_matrix.cpp",
+  "output": "CMakeFiles/test_row_major_double_matrix.dir/test_row_major_double_matrix.cpp.o"
 },
 {
   "directory": "/home/mehdi/linearC/build/_deps/googletest-build/googlemock",

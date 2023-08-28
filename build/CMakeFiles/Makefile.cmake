@@ -79,7 +79,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/test_double_element_type.dir/DependInfo.cmake"
-  "CMakeFiles/test_monotype_matrix.dir/DependInfo.cmake"
+  "CMakeFiles/test_row_major_double_matrix.dir/DependInfo.cmake"
   "_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
   "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake"
   "_deps/googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"

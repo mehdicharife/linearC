@@ -4,7 +4,6 @@ typedef struct monotype_matrix monotype_matrix;
 
 struct monotype_matrix {
     matrix parent;
-    element_type* ptype;
 };
 
 matrix* new_monotype_matrix(element_type* ptype);

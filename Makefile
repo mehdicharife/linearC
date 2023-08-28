@@ -175,17 +175,17 @@ test_double_element_type/fast:
 .PHONY : test_double_element_type/fast
 
 #=============================================================================
-# Target rules for targets named test_monotype_matrix
+# Target rules for targets named test_row_major_double_matrix
 
 # Build rule for target.
-test_monotype_matrix: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_monotype_matrix
-.PHONY : test_monotype_matrix
+test_row_major_double_matrix: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_row_major_double_matrix
+.PHONY : test_row_major_double_matrix
 
 # fast build rule for target.
-test_monotype_matrix/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_monotype_matrix.dir/build.make CMakeFiles/test_monotype_matrix.dir/build
-.PHONY : test_monotype_matrix/fast
+test_row_major_double_matrix/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_row_major_double_matrix.dir/build.make CMakeFiles/test_row_major_double_matrix.dir/build
+.PHONY : test_row_major_double_matrix/fast
 
 #=============================================================================
 # Target rules for targets named gmock
@@ -263,29 +263,29 @@ test_double_element_type.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_double_element_type.dir/build.make CMakeFiles/test_double_element_type.dir/test_double_element_type.cpp.s
 .PHONY : test_double_element_type.cpp.s
 
-test_monotype_matrix.o: test_monotype_matrix.cpp.o
-.PHONY : test_monotype_matrix.o
+test_row_major_double_matrix.o: test_row_major_double_matrix.cpp.o
+.PHONY : test_row_major_double_matrix.o
 
 # target to build an object file
-test_monotype_matrix.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_monotype_matrix.dir/build.make CMakeFiles/test_monotype_matrix.dir/test_monotype_matrix.cpp.o
-.PHONY : test_monotype_matrix.cpp.o
+test_row_major_double_matrix.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_row_major_double_matrix.dir/build.make CMakeFiles/test_row_major_double_matrix.dir/test_row_major_double_matrix.cpp.o
+.PHONY : test_row_major_double_matrix.cpp.o
 
-test_monotype_matrix.i: test_monotype_matrix.cpp.i
-.PHONY : test_monotype_matrix.i
+test_row_major_double_matrix.i: test_row_major_double_matrix.cpp.i
+.PHONY : test_row_major_double_matrix.i
 
 # target to preprocess a source file
-test_monotype_matrix.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_monotype_matrix.dir/build.make CMakeFiles/test_monotype_matrix.dir/test_monotype_matrix.cpp.i
-.PHONY : test_monotype_matrix.cpp.i
+test_row_major_double_matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_row_major_double_matrix.dir/build.make CMakeFiles/test_row_major_double_matrix.dir/test_row_major_double_matrix.cpp.i
+.PHONY : test_row_major_double_matrix.cpp.i
 
-test_monotype_matrix.s: test_monotype_matrix.cpp.s
-.PHONY : test_monotype_matrix.s
+test_row_major_double_matrix.s: test_row_major_double_matrix.cpp.s
+.PHONY : test_row_major_double_matrix.s
 
 # target to generate assembly for a file
-test_monotype_matrix.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_monotype_matrix.dir/build.make CMakeFiles/test_monotype_matrix.dir/test_monotype_matrix.cpp.s
-.PHONY : test_monotype_matrix.cpp.s
+test_row_major_double_matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_row_major_double_matrix.dir/build.make CMakeFiles/test_row_major_double_matrix.dir/test_row_major_double_matrix.cpp.s
+.PHONY : test_row_major_double_matrix.cpp.s
 
 # Help Target
 help:
@@ -304,13 +304,13 @@ help:
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... test_double_element_type"
-	@echo "... test_monotype_matrix"
+	@echo "... test_row_major_double_matrix"
 	@echo "... test_double_element_type.o"
 	@echo "... test_double_element_type.i"
 	@echo "... test_double_element_type.s"
-	@echo "... test_monotype_matrix.o"
-	@echo "... test_monotype_matrix.i"
-	@echo "... test_monotype_matrix.s"
+	@echo "... test_row_major_double_matrix.o"
+	@echo "... test_row_major_double_matrix.i"
+	@echo "... test_row_major_double_matrix.s"
 .PHONY : help
 
 

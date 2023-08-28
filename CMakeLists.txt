@@ -19,6 +19,6 @@ target_link_libraries(test_double_element_type gtest_main)
 add_test(test_double_element_type test_double_element_type.cpp)
 
 
-add_executable(test_monotype_matrix test_monotype_matrix.cpp)
-target_link_libraries(test_monotype_matrix gtest_main)
-add_test(test_monotype_matrix test_monotype_matrix.cpp)
+add_executable(test_row_major_double_matrix test_row_major_double_matrix.cpp)
+target_link_libraries(test_row_major_double_matrix gtest_main)
+add_test(test_row_major_double_matrix test_row_major_double_matrix.cpp)

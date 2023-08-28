@@ -1,5 +1,5 @@
 /home/mehdi/linearC/CMakeFiles/test_double_element_type.dir
-/home/mehdi/linearC/CMakeFiles/test_monotype_matrix.dir
+/home/mehdi/linearC/CMakeFiles/test_row_major_double_matrix.dir
 /home/mehdi/linearC/CMakeFiles/edit_cache.dir
 /home/mehdi/linearC/CMakeFiles/rebuild_cache.dir
 /home/mehdi/linearC/CMakeFiles/list_install_components.dir
