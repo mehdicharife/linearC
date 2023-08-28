@@ -341,11 +341,11 @@ CMakeFiles/test_row_major_double_matrix.dir/test_row_major_double_matrix.cpp.o: 
   double_element_type.c \
   double_element_type.h \
   element_type.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
   type_distribution/uniform_type_distribution.c \
   type_distribution/uniform_type_distribution.h \
   type_distribution/type_distribution.h \
   element_type.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
   storage/row_major_storage.c \
   storage/row_major_storage.h \
   storage/storage.h \
@@ -362,11 +362,11 @@ matrix.c:
 
 storage/row_major_storage.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
-
 type_distribution/type_distribution.h:
 
 type_distribution/uniform_type_distribution.c:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
 
 element_type.h:
 

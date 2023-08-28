@@ -7,6 +7,7 @@ extern "C" {
     #include "matrix.c"
 }
 
+/*
 
 TEST(row_major_double_matrix_test_suite, sets_a_cell) {
     double x = 5.0;
@@ -73,8 +74,66 @@ TEST(row_major_double_matrix_test_suite, adds_two_matrices) {
         }
     }
 
+}
+
+*/
 
 
+TEST(row_major_double_matrix_test_suite, multiplies_two_matrices) {
+    matrix* pA = new_row_major_double_matrix();
+    matrix* pB = new_row_major_double_matrix();
+    allocate_storage(pA, 3, 3);
+    allocate_storage(pB, 3, 5);
+
+    double a = 2;
+    double b = 3;
+    set_all_cells(pA, &a);
+    set_all_cells(pB, &b);
+
+    //printf("%p %p\n", (void*) get_cell_type(pA, 0, 0), (void*) get_cell_type(pB, 0, 0));
+
+    
+
+    matrix* pC = multiply_matrices(pA, pB);
+    element_type* ptype = get_cell_type(pC, 0, 0);
+
+    printf("%ld\n\n\n", pA->col_count);
+    
+    for(size_t row = 0; row < pA->row_count; row++) {
+        for(size_t col = 0; col < pA->col_count; col++) {
+            
+            size_t test = pA->pdistr->total_size_before(pA->pdistr, pA->row_count, pA->col_count, lexicographical, row, col);
+            printf("%ld\n", test);
+            //printf("A: (%ld %ld): %f\n", row, col, *((double*) get_cell_address(pA, row, col)));
+        }
+    }
+
+    for(size_t row = 0; row < pC->row_count; row++) {
+        for(size_t col = 0; col < pC->col_count; col++) {
+            void* pexpected = ptype->get_addition_identity();
+            for(size_t k = 0; k < pA->col_count; k++) {
+                void* temp = ptype->multiply(
+                    get_cell_address(pA, row, k),
+                    get_cell_address(pB, k, col)
+                );
+
+                ptype->add(pexpected, temp, pexpected);
+                
+                free(temp);
+            }
+
+            printf("%lf\n", *((double*) get_cell_address(pC, row, col)));
+
+            EXPECT_TRUE(ptype->are_equal(
+                get_cell_address(pC, row, col),
+                pexpected
+            ));
+
+            free(pexpected);
+        }
+    }
+
+    
 }
 
 

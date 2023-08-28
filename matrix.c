@@ -7,27 +7,26 @@ void* get_cell_address(matrix* pmatrix, size_t row, size_t col) {
     return pmatrix->pstorage->get_cell_address(
         pmatrix->data,
         pmatrix->pdistr,
+        pmatrix->row_count,
+        pmatrix->col_count,
         row,
         col
     );
 }
 
 element_type* get_cell_type(matrix* pmatrix, size_t row, size_t col) {
-    return pmatrix->pdistr->get_cell_type(pmatrix->pdistr, row, col);
+    return pmatrix->pdistr->get_cell_type(pmatrix->pdistr, pmatrix->row_count, pmatrix->col_count, row, col);
 }
 
 void allocate_storage(matrix* pmatrix, size_t row_count, size_t col_count) {
-    pmatrix->pdistr->col_count = col_count;
-    pmatrix->pdistr->row_count = row_count;
     pmatrix->pstorage->allocate_storage(&(pmatrix->data), pmatrix->pdistr, row_count, col_count);
-    pmatrix->col_count = col_count;
     pmatrix->row_count = row_count;
-
+    pmatrix->col_count = col_count;
 }
 
 
 void set_cell(matrix* pmat, size_t row, size_t col, void* pvalue) {
-    pmat->pdistr->get_cell_type(pmat->pdistr, row, col)->set(get_cell_address(pmat, row, col), pvalue);
+    pmat->pdistr->get_cell_type(pmat->pdistr, pmat->row_count, pmat->col_count, row, col)->set(get_cell_address(pmat, row, col), pvalue);
 }
 
 
@@ -79,6 +78,43 @@ matrix* add_matrices(matrix* pA, matrix* pB) {
     return pC;
 }
 
+
+matrix* multiply_matrices(matrix* pA, matrix* pB) {
+    assert(pA->col_count == pB->row_count &&
+           pA->pdistr->get_type_count(pA->pdistr) == 1 && 
+           pB->pdistr->get_type_count(pB->pdistr) == 1 &&
+           get_cell_type(pA, 0, 0) == get_cell_type(pB, 0, 0) &&
+           get_cell_type(pA, 0, 0)->multiply != NULL &&
+           get_cell_type(pB, 0, 0)->add != NULL
+    );
+
+    matrix* pC = (matrix*) malloc(sizeof(matrix));
+    pC->pdistr = pA->pdistr;
+    pC->pstorage = pA->pstorage;
+    allocate_storage(pC, pA->row_count, pB->col_count);
+
+    element_type* ptype = get_cell_type(pC, 0, 0);
+    for(size_t row = 0; row < pC->row_count; row++) {
+        for(size_t col = 0; col < pC->col_count; col++) {
+            void* pvalue = ptype->get_addition_identity();
+            for(size_t k = 0; k < pA->col_count; k++) {
+                void* temp = ptype->multiply(
+                    get_cell_address(pA, row, k),
+                    get_cell_address(pB, k, col)
+                );
+
+                ptype->add(pvalue, temp, pvalue);
+
+                free(temp);
+            }
+
+            set_cell(pC, row, col, pvalue);
+            free(pvalue);
+        }
+    }
+
+    return pC;
+}
 
 
 

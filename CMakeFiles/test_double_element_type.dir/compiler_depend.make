@@ -340,8 +340,11 @@ CMakeFiles/test_double_element_type.dir/test_double_element_type.cpp.o: test_dou
   _deps/googletest-src/googletest/include/gtest/gtest_prod.h \
   double_element_type.c \
   double_element_type.h \
-  element_type.h
+  element_type.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h
 
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
 
 element_type.h:
 
