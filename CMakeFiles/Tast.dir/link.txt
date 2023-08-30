@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/Tast.dir/test_double_element_type.cpp.o -o Tast  lib/libgtest_main.a lib/libgtest.a 

@@ -1,1 +1,0 @@
-/usr/bin/g++ -g -rdynamic CMakeFiles/test_monotype_matrix.dir/test_monotype_matrix.cpp.o -o test_monotype_matrix  lib/libgtest_main.a lib/libgtest.a 
