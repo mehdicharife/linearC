@@ -1,6 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "double_element_type.c": "cpp"
+        "double_element_type.c": "cpp",
+        "double_element_type.h": "c",
+        "variant": "cpp"
     }
 }
