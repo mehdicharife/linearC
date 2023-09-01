@@ -11,6 +11,7 @@
 
     struct element_type {
         size_t size;
+        char* name;
         void* (*pointer_addition) (void* a, size_t size);
         void (*add)(void* elem1, void* elem2, void* output);
         void (*subtract)(void* elem1, void* elem2, void* output);

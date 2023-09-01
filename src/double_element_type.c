@@ -12,6 +12,7 @@ element_type* new_double_element_type() {
         ptype = (element_type*) malloc(sizeof(element_type));
 
         ptype->size = sizeof(double);
+        ptype->name = "double";
         ptype->pointer_addition = double_element_type_pointer_addition;
         ptype->add = double_element_type_add;
         ptype->subtract = double_element_type_substract;

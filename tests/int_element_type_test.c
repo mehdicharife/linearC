@@ -1,18 +1,18 @@
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include <criterion/parameterized.h>
-#include "../include/double_element_type.h"
+#include "../include/int_element_type.h"
 
 
 element_type* (*type_factory)();
 
 void setup(void) {
-    type_factory = new_double_element_type;
+    type_factory = new_int_element_type;
 }
 
-TestSuite(double_element_type_test_suite, .init=setup);
+TestSuite(int_element_type_test_suite, .init=setup);
 
-Test(double_element_type_test_suite, singleton) {
+Test(int_element_type_test_suite, singleton) {
     element_type* ptype1 = type_factory();
     element_type* ptype2 = type_factory();
 
@@ -20,27 +20,27 @@ Test(double_element_type_test_suite, singleton) {
 }
 
 
-Test(double_element_type_test_suite, pointer_addition) {
-    double arr[5] = {1.0, 2.0, 5.0, 8.0, 6.0};
+Test(int_element_type_test_suite, pointer_addition) {
+    int arr[5] = {1, 2, 5, 8, 6};
     int index = 2;
 
     element_type* dbtype = (element_type*) type_factory();
-    double* p = (double*) dbtype->pointer_addition(arr, index);
+    int* p = (int*) dbtype->pointer_addition(arr, index);
 
-    cr_expect(eq(dbl, *p, arr[index]));
+    cr_expect(eq(int, *p, arr[index]));
 }
 
-Test(double_element_type_test_suite, addition) {
-    double x = 5.0, y = 8.0, z;
+Test(int_element_type_test_suite, addition) {
+    int x = 5, y = 8, z;
 
     element_type* ptype = type_factory();
     ptype->add(&x, &y, &z);
 
-    cr_expect(eq(dbl, z, x + y));
+    cr_expect(eq(int, z, x + y));
 }
 
-Test(double_element_type_test_suite, identity) {
-    double x = 8.0, y;
+Test(int_element_type_test_suite, identity) {
+    int x = 8, y;
 
     element_type* ptype = type_factory();
     ptype->add(&x,
@@ -48,27 +48,27 @@ Test(double_element_type_test_suite, identity) {
                &y
     );
 
-    cr_expect(eq(dbl, x, y));
+    cr_expect(eq(int, x, y));
 }
 
 
-Test(double_element_type_test_suite, set) {
-    double x;
-    double y = 7.0;
+Test(int_element_type_test_suite, set) {
+    int x;
+    int y = 7;
 
     element_type* ptype = type_factory();
     ptype->set(&x, &y);
 
-    cr_expect(eq(dbl, x, y));
+    cr_expect(eq(int, x, y));
 }
 
 
-Test(double_element_type_test_suite, matches_string) {
+Test(int_element_type_test_suite, matches_string) {
     element_type* ptype = type_factory();
-    char str1[] = "5.2";
-    char str2[] = ".5";
-    char str3[] = "not_a_double";
-    char str4[] = "2";
+    char str1[] = "5";
+    char str2[] = "0";
+    char str3[] = "not_a_int";
+    char str4[] = "2.6";
     
     cr_expect(ptype->matches_string(str1));
     cr_expect(ptype->matches_string(str2));   
