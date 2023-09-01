@@ -16,24 +16,25 @@ type_distribution* new_uniform_type_distribution(element_type* ptype) {
 }
 
 
-element_type* uniform_type_distribution_get_cell_type(type_distribution* pdistr, size_t row_count, size_t col_count, size_t row, size_t col) {
+element_type* uniform_type_distribution_get_cell_type(type_distribution* pdistr, size_t row, size_t col) {
     return ((uniform_type_distribution*) pdistr)->ptype;
 }
 
-size_t uniform_type_distribution_total_size_before(type_distribution* pdistr, size_t row_count, size_t col_count, spatial_order order, size_t row, size_t col) {
-    size_t ret_size;
+size_t uniform_type_distribution_total_size_before(type_distribution* pdistr, size_t row_count, size_t col_count, spatial_order* porder, size_t row_id, size_t col_id) {
+    size_t element_size = ((uniform_type_distribution*) pdistr)->ptype->size;
+    size_t element_count;
 
-    switch(order) {
-        case lexicographical:
-            ret_size = row*col_count + col;
+    switch(porder->first_track) {
+        case row:
+            element_count = row_id*col_count + col_id;
             break;
 
-        case colexicographical:
-            ret_size = col*row_count + row;
+        case col:
+            element_count = col_id*row_count + row_id;
             break;
     }
 
-    return ret_size;
+    return element_count*element_size;
 }
 
 type_distribution_kind uniform_type_distribution_get_kind(void) {

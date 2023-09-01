@@ -7,6 +7,7 @@
     typedef struct element_type element_type;
     typedef struct element element;
 
+    element_type* new_no_type();
 
     struct element_type {
         size_t size;

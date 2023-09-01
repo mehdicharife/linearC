@@ -3,6 +3,7 @@
     "files.associations": {
         "double_element_type.c": "cpp",
         "double_element_type.h": "c",
-        "variant": "cpp"
+        "variant": "cpp",
+        "type_per_col_distribution.h": "c"
     }
 }
