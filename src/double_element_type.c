@@ -1,5 +1,9 @@
 #include "../include/double_element_type.h"
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 element_type* new_double_element_type() {
     static element_type* ptype = NULL;
@@ -15,6 +19,7 @@ element_type* new_double_element_type() {
         ptype->get_addition_identity = double_element_type_get_addition_identity;
         ptype->multiply = double_element_type_multiply;
         ptype->set = double_element_type_set;
+        ptype->matches_string = double_element_type_matches_string;
     }
 
     return ptype;
@@ -56,4 +61,27 @@ void* double_element_type_multiply(void* px, void* py) {
 
 bool double_element_type_are_equal(void* px, void* py) {
     return *((double*) px) == *((double*) py);
+}
+
+bool double_element_type_matches_string(char* str) {
+    bool dotted = false;
+    bool digits_after_dot = false;
+
+    for(size_t k = 0; k < strlen(str); k++) {
+        if(!isdigit(str[k])) {
+            if(str[k] == '.') {
+                dotted = true;
+                continue;
+            }
+
+            return false;
+        }
+
+        if(dotted && !digits_after_dot) {
+            digits_after_dot = true;
+        }
+
+    }
+
+    return dotted && digits_after_dot;
 }
