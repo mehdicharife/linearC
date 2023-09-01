@@ -1,6 +1,21 @@
 #include <criterion/criterion.h>
+#include <criterion/parameterized.h>
 #include <criterion/new/assert.h>
+
 #include "../include/matrix.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+matrix*(*matrix_factory)();  
+
+
+void setup() {
+    matrix_factory = new_row_major_double_matrix;
+}
+
+
+TestSuite(row_major_double_matrix_test_suite, .init=setup);
 
 
 Test(row_major_double_matrix_test_suite, sets_a_cell) {
@@ -9,7 +24,7 @@ Test(row_major_double_matrix_test_suite, sets_a_cell) {
 
     size_t row_count = 3, col_count = 2;
 
-    matrix* pmatrix = new_row_major_double_matrix();
+    matrix* pmatrix = matrix_factory();
     allocate_storage(pmatrix, row_count, col_count);
 
 
@@ -27,7 +42,7 @@ Test(row_major_double_matrix_test_suite, sets_all_cells) {
     double x = 8;
     size_t row_count = 8, col_count = 2;
 
-    matrix* pmatrix = new_row_major_double_matrix();
+    matrix* pmatrix = matrix_factory();
     allocate_storage(pmatrix, row_count, col_count);
     set_all_cells(pmatrix, &x);
 
@@ -45,8 +60,8 @@ Test(row_major_double_matrix_test_suite, sets_all_cells) {
 Test(row_major_double_matrix_test_suite, adds_two_matrices) {
     double a = 1, b = 2;
 
-    matrix* pA = new_row_major_double_matrix();
-    matrix* pB = new_row_major_double_matrix();
+    matrix* pA = matrix_factory();
+    matrix* pB = matrix_factory();
     allocate_storage(pA, 2, 2);
     allocate_storage(pB, 2, 2);
     set_all_cells(pA, &a);
@@ -73,8 +88,8 @@ Test(row_major_double_matrix_test_suite, adds_two_matrices) {
 
 
 Test(row_major_double_matrix_test_suite, multiplies_two_matrices) {
-    matrix* pA = new_row_major_double_matrix();
-    matrix* pB = new_row_major_double_matrix();
+    matrix* pA = matrix_factory();
+    matrix* pB = matrix_factory();
     allocate_storage(pA, 3, 3);
     allocate_storage(pB, 3, 5);
 

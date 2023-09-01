@@ -2,6 +2,7 @@
 #include "../../include/uniform_type_distribution.h"
 #include "../../include/row_major_storage.h"
 #include "../../include/double_element_type.h"
+#include "../../include/type_per_track_distribution.h"
 
 void* get_cell_address(matrix* pmatrix, size_t row, size_t col) {
     return pmatrix->pstorage->get_cell_address(
@@ -15,7 +16,7 @@ void* get_cell_address(matrix* pmatrix, size_t row, size_t col) {
 }
 
 element_type* get_cell_type(matrix* pmatrix, size_t row, size_t col) {
-    return pmatrix->pdistr->get_cell_type(pmatrix->pdistr, pmatrix->row_count, pmatrix->col_count, row, col);
+    return pmatrix->pdistr->get_cell_type(pmatrix->pdistr, row, col);
 }
 
 void allocate_storage(matrix* pmatrix, size_t row_count, size_t col_count) {
@@ -26,7 +27,7 @@ void allocate_storage(matrix* pmatrix, size_t row_count, size_t col_count) {
 
 
 void set_cell(matrix* pmat, size_t row, size_t col, void* pvalue) {
-    pmat->pdistr->get_cell_type(pmat->pdistr, pmat->row_count, pmat->col_count, row, col)->set(get_cell_address(pmat, row, col), pvalue);
+    get_cell_type(pmat, row, col)->set(get_cell_address(pmat, row, col), pvalue);
 }
 
 
