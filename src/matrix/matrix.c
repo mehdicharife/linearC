@@ -128,3 +128,8 @@ matrix* new_row_major_double_matrix() {
     return pmatrix;
 }
 
+
+matrix* new_csv_generated_matrix(FILE* pfile) {
+    
+    return NULL;
+}
