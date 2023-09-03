@@ -5,6 +5,7 @@
     #include <stdlib.h>
     #include <stddef.h>
     #include <assert.h>
+    #include <stdio.h>
     #include "type_distribution.h"
     #include "storage.h"
 
@@ -31,5 +32,5 @@
     matrix* multiply_matrices(matrix* pA, matrix* pB);
     
     matrix* new_row_major_double_matrix();
-
+    matrix* new_csv_generated_matrix(FILE* fp);
 #endif
