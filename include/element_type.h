@@ -3,6 +3,7 @@
 
     #include <stddef.h>
     #include <stdbool.h>
+    #include <stdio.h>
 
     typedef struct element_type element_type;
     typedef struct element element;
@@ -30,5 +31,10 @@
         element_type* ptype;
         void* address;
     };
+
+    void set_to_supported_element_types(element_type*** parr, size_t* parray_size);
+    
+    element_type* get_element_type_from_str(char* str, element_type** types, size_t type_count);
+    void set_element_types_from_csv_file(element_type*** types, size_t* ptype_count, FILE* fp);
 
 #endif

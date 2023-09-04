@@ -74,7 +74,7 @@ bool double_element_type_matches_string(char* str) {
                 dotted = true;
                 continue;
             }
-
+            if(k == 0 && str[k] == '-') { continue; }
             return false;
         }
 

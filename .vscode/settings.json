@@ -6,6 +6,7 @@
         "variant": "cpp",
         "type_per_col_distribution.h": "c",
         "memory": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "int_element_type.h": "c"
     }
 }

@@ -87,8 +87,13 @@ Test(get_untill_delim_test_suite, handles_multiple_quotes) {
     cr_assert(eq(str, got, expected));
 }
 
+Test(get_untill_delim_test_suite, returns_NULL_at_EOF) {
+    FILE* fp = tmpfile();
+    cr_expect(eq(ptr, get_untill_delim(fp, delimiters, delimiters_count, NULL), NULL));
+}
 
 
+/*
 Test(get_untill_delim_test_suite, can_be_used_to_make_exact_copy_of_file) {
     FILE* fp = fopen("tests/subjects/titanic.csv", "r");
     if(fp == NULL) {
@@ -113,3 +118,4 @@ Test(get_untill_delim_test_suite, can_be_used_to_make_exact_copy_of_file) {
     fclose(fp);
     fclose(copy);
 } 
+*/

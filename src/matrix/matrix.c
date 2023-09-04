@@ -129,7 +129,3 @@ matrix* new_row_major_double_matrix() {
 }
 
 
-matrix* new_csv_generated_matrix(FILE* pfile) {
-    
-    return NULL;
-}

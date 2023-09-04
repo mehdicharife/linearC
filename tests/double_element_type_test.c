@@ -69,9 +69,13 @@ Test(double_element_type_test_suite, matches_string) {
     char str2[] = ".5";
     char str3[] = "not_a_double";
     char str4[] = "2";
+    char str5[] = "-1.2";
     
     cr_expect(ptype->matches_string(str1));
     cr_expect(ptype->matches_string(str2));   
     cr_expect(not (ptype->matches_string(str3)));
     cr_expect(not (ptype->matches_string(str4)));
+    cr_expect(ptype->matches_string(str5));
 }
+
+

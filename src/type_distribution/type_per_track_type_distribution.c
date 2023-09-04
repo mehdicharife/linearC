@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 
-type_distribution* new_type_per_track_distribution(element_type* types, size_t type_count) {
+type_distribution* new_type_per_track_distribution(track_kind tkind, element_type** types, size_t type_count) {
     type_per_track_distribution* pdistr =  malloc(sizeof(type_per_track_distribution));
     pdistr->types = types;
     pdistr->type_count = type_count;
@@ -27,7 +27,7 @@ element_type* type_per_track_distribution_get_cell_type(type_distribution* pdist
         return NULL;
     }
 
-    return (pdistro->types + col);
+    return *(pdistro->types + col);
 }
 
 
@@ -49,11 +49,11 @@ size_t type_per_track_distribution_get_sub_track_size(type_distribution* pdistr,
     size_t secondary_track_count = (end - start + 1);
 
     if(tkind == pdistribution->tkind) {
-        ret_size = (pdistribution->types[track_id].size)*secondary_track_count;
+        ret_size = (pdistribution->types[track_id]->size)*secondary_track_count;
     } else {
         ret_size = 0;
         for(size_t k = start; k < end; k++) {
-            ret_size += pdistribution->types[k].size;
+            ret_size += pdistribution->types[k]->size;
         }   
     }
 
@@ -70,7 +70,7 @@ bool type_per_track_distribution_all_types_are_addable(type_distribution* pdistr
     type_per_track_distribution* pdistribution = (type_per_track_distribution*) pdistr;
     
     for(size_t k = 0; k < pdistribution->type_count; k++) {
-        if(pdistribution->types[k].add == NULL) {
+        if(pdistribution->types[k]->add == NULL) {
             return false;
         }
     }

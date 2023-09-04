@@ -6,6 +6,8 @@
 
 
 char* get_untill_delim(FILE* fp, char* delimiters, int delimiters_count, char* stop_cause_delimiter) {
+    if(fgetc(fp) == EOF) { return NULL; } else { fseek(fp, -1, SEEK_CUR); }
+
     int char_count = 0;
     char curr_char;
     int spaces_before_count = 0;
@@ -39,7 +41,7 @@ char* get_untill_delim(FILE* fp, char* delimiters, int delimiters_count, char* s
     
     char_count = char_count - spaces_after_count;
     offset = -char_count - spaces_after_count - (feof(fp) ? 0 : 1);
-    int seeking_successfull = fseek(fp, offset, SEEK_CUR);
+    int seeking_successfull = !fseek(fp, offset, SEEK_CUR);
     if(!seeking_successfull) { perror("couldn't seek"); }
    
 
