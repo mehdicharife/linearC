@@ -119,3 +119,17 @@ Test(get_untill_delim_test_suite, can_be_used_to_make_exact_copy_of_file) {
     fclose(copy);
 } 
 */
+
+Test(get_untill_delim_test_suite, sets_dimensions) {
+    FILE* fp = tmpfile();
+    fputs("1, 2,0\n3,4,8", fp);
+    rewind(fp);
+
+    size_t got_row, got_col, expected_row, expected_col;
+    expected_row = 2;
+    expected_col = 3;
+    set_dimensions(fp, &got_row, &got_col);
+
+    cr_expect(eq(uint, got_row, expected_row));
+    cr_expect(eq(uint, got_col, expected_col));
+}

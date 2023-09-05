@@ -32,5 +32,5 @@
     matrix* multiply_matrices(matrix* pA, matrix* pB);
     
     matrix* new_row_major_double_matrix();
-    matrix* new_csv_generated_matrix(FILE* fp);
+    matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage);
 #endif

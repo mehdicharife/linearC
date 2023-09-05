@@ -47,7 +47,7 @@
 
     size_t get_sub_track_size(type_distribution* pdistr, size_t row_count, size_t col_count, track_kind tkind, size_t track_id, size_t start_track, size_t finish_track);
 
-    type_distribution* new_type_distribution_from_csv_file(char* file_path);
+    type_distribution* new_type_distribution_from_csv_file(FILE* fp);
     type_distribution* new_type_distribution_from_types_array(element_type** types, size_t type_count);
 
 

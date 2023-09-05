@@ -79,3 +79,15 @@ Test(double_element_type_test_suite, matches_string) {
 }
 
 
+
+Test(double_element_type_test_suite, gets_from_string) {
+    element_type* ptype = type_factory();
+    cr_assert(ptype->get_from_string != NULL);
+    
+    char* double_as_str = "5.0";
+    double expected = 5;
+    void* got = ptype->get_from_string(double_as_str);
+    
+    cr_expect(ptype->are_equal(got, &expected));
+    free(got);
+}

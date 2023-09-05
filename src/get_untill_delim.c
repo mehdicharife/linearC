@@ -52,3 +52,36 @@ char* get_untill_delim(FILE* fp, char* delimiters, int delimiters_count, char* s
 }
 
 
+char* csv_get_untill_delim(FILE* fp, char* stop_cause_delimiter) {
+    static size_t delimiters_count = 2;
+    static char* delimiters = NULL;
+    if(delimiters == NULL) {
+         delimiters = malloc(delimiters_count*sizeof(char));
+         delimiters[0] = ',';
+         delimiters[1] = '\n';
+    }
+
+    return get_untill_delim(fp, delimiters, delimiters_count, stop_cause_delimiter);
+}
+
+
+void set_dimensions(FILE* fp, size_t* prow, size_t* pcol) {
+    char* stop_cause;
+    char* curr_str;
+    *pcol = 0;
+    *prow = 0;
+
+    while((curr_str = csv_get_untill_delim(fp, stop_cause)) != NULL) {
+        if(*stop_cause == '\n' || (*stop_cause == EOF && *prow > 0)) { (*prow)++; }
+    }
+    rewind(fp);
+
+    while((curr_str = csv_get_untill_delim(fp, stop_cause)) != NULL) {
+        (*pcol)++;
+        if(*stop_cause == EOF || *stop_cause == '\n') {
+            break;
+        }
+    }
+
+    return;
+}

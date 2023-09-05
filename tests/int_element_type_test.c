@@ -75,3 +75,13 @@ Test(int_element_type_test_suite, matches_string) {
     cr_expect(not (ptype->matches_string(str3)));
     cr_expect(not (ptype->matches_string(str4)));
 }
+
+
+Test(int_element_type_test_suite, get_value_from_string) {
+    element_type* ptype = type_factory();
+    char* int_as_str = "5";
+    void* got = ptype->get_from_string(int_as_str);
+    int expected = 5;
+
+    cr_expect(ptype->are_equal(got, &expected));
+}

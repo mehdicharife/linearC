@@ -30,8 +30,9 @@ Test(type_distribution_from_types_array_test_suite, generate_type_per_col_distri
         types[k] = (k == 0) ? new_double_element_type() : new_int_element_type();
     }
 
-    type_distribution* expected = new_type_per_track_distribution(col, types, type_count);
+    type_distribution* expected = new_type_per_track_distribution(1, types, type_count);
     type_distribution* got = new_type_distribution_from_types_array(types, type_count);
+
 
     cr_expect(expected->equals(expected, got));
 }

@@ -21,6 +21,7 @@ element_type* new_int_element_type() {
         ptype->multiply = int_element_type_multiply;
         ptype->set = int_element_type_set;
         ptype->matches_string = int_element_type_matches_string;
+        ptype->get_from_string = int_element_type_get_from_string;
     }
 
     return ptype;
@@ -77,4 +78,10 @@ bool int_element_type_matches_string(char* str) {
     }
 
     return true;
+}
+
+void* int_element_type_get_from_string(char* str) {
+    int* pk = malloc(sizeof(int));
+    sscanf(str, "%d", pk);
+    return (void*) pk;
 }

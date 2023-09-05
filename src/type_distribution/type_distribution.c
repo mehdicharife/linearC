@@ -51,3 +51,13 @@ type_distribution* new_type_distribution_from_types_array(element_type** array, 
 
     return new_type_per_track_distribution(col, array, type_count);
 }
+
+
+
+type_distribution* new_type_distribution_from_csv_file(FILE* fp) {
+    size_t type_count;
+    element_type** types;
+    set_element_types_from_csv_file(&types, &type_count, fp);
+
+    return new_type_distribution_from_types_array(types, type_count);
+}

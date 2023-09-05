@@ -128,4 +128,12 @@ matrix* new_row_major_double_matrix() {
     return pmatrix;
 }
 
+matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage) {
+    //matrix* pmatrix = malloc(sizeof(matrix));
+    //pmatrix->pstorage = pstorage;
+    //type_distribution* pdsitr = new_type_distribution_from_csv_file(fp);
+
+    return NULL;
+}
+
 

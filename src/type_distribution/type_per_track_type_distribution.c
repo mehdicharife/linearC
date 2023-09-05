@@ -6,6 +6,7 @@
 
 type_distribution* new_type_per_track_distribution(track_kind tkind, element_type** types, size_t type_count) {
     type_per_track_distribution* pdistr =  malloc(sizeof(type_per_track_distribution));
+    pdistr->tkind = tkind;
     pdistr->types = types;
     pdistr->type_count = type_count;
 
@@ -107,7 +108,7 @@ bool type_per_track_distribution_equals(type_distribution* pdistr1, type_distrib
     }
 
     for(size_t k = 0; k < pdistribution1->type_count; k++) {
-        if(&(pdistribution1->types[k]) != &(pdistribution2->types[k])) {
+        if(pdistribution1->types[k] != pdistribution2->types[k]) {
             return false;
         }
     }

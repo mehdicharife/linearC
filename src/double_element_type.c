@@ -21,6 +21,7 @@ element_type* new_double_element_type() {
         ptype->multiply = double_element_type_multiply;
         ptype->set = double_element_type_set;
         ptype->matches_string = double_element_type_matches_string;
+        ptype->get_from_string = double_element_type_get_from_string;
     }
 
     return ptype;
@@ -85,4 +86,10 @@ bool double_element_type_matches_string(char* str) {
     }
 
     return dotted && digits_after_dot;
+}
+
+void* double_element_type_get_from_string(char* str) {
+    double* px = malloc(sizeof(double));
+    sscanf(str, "%lf", px);
+    return (void*) px;
 }
