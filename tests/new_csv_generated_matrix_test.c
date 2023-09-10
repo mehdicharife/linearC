@@ -1,13 +1,16 @@
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
+#include <criterion/parameterized.h>
+#include <stdio.h>
 #include "../include/matrix.h"
 #include "../include/row_major_storage.h"
 #include "../include/get_untill.h"
 #include "../include/element_type_eloquence_cmp.h"
-#include <stdio.h>
+
 
 
 storage* pstorage;
+
 
 void setup(void) {
     pstorage = new_row_major_storage();
@@ -15,8 +18,25 @@ void setup(void) {
 
 TestSuite(new_csv_generated_matrix_test_suite, .init=setup);
 
-Test(new_csv_generated_matrix_test_suite, basic) {
-    FILE* fp = fopen("/home/mehdi/linearC/tests/subjects/basic.csv", "r");
+
+
+#define FILES_COUNT 1
+#define FILES_PATHS (char*[]) {"/home/mehdi/linearC/tests/subjects/basic.csv"}
+ParameterizedTestParameters(new_csv_generated_matrix_test_suite, creates_matrix_from_csv_file) {
+    static char* files_paths[FILES_COUNT];
+    for(size_t k = 0; k < FILES_COUNT; k++) {
+        files_paths[k] = cr_malloc(strlen(FILES_PATHS[k]));
+        strcpy(files_paths[k], FILES_PATHS[k]);
+    }
+
+    return cr_make_param_array(char*, files_paths, FILES_COUNT);
+}
+
+
+
+ParameterizedTest(char** p_test_file_path, new_csv_generated_matrix_test_suite, creates_matrix_from_csv_file) {
+
+    FILE* fp = fopen(*p_test_file_path, "r");
     if(fp == NULL) {
         perror("couldn't open file?");
     }
@@ -43,5 +63,6 @@ Test(new_csv_generated_matrix_test_suite, basic) {
             free(expected);
         }
     }
+    
 
 }
