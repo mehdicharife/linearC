@@ -63,7 +63,7 @@ void* double_element_type_multiply(void* px, void* py) {
 }
 
 bool double_element_type_are_equal(void* px, void* py) {
-    return *((double*) px) == *((double*) py);
+    return labs(*((double*) px) - *((double*) py)) < 0.00001;
 }
 
 bool double_element_type_matches_string(char* str) {

@@ -22,6 +22,7 @@ element_type* new_int_element_type() {
         ptype->set = int_element_type_set;
         ptype->matches_string = int_element_type_matches_string;
         ptype->get_from_string = int_element_type_get_from_string;
+        ptype->print = int_element_type_print;
     }
 
     return ptype;
