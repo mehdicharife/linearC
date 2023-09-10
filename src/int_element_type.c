@@ -85,3 +85,7 @@ void* int_element_type_get_from_string(char* str) {
     sscanf(str, "%d", pk);
     return (void*) pk;
 }
+
+void int_element_type_print(void* pelement) {
+    printf("%d\n", *((int*) pelement));
+}

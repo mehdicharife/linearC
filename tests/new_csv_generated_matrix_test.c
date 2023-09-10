@@ -3,6 +3,7 @@
 #include "../include/matrix.h"
 #include "../include/row_major_storage.h"
 #include "../include/get_untill.h"
+#include "../include/element_type_eloquence_cmp.h"
 #include <stdio.h>
 
 
@@ -15,16 +16,25 @@ void setup(void) {
 TestSuite(new_csv_generated_matrix_test_suite, .init=setup);
 
 Test(new_csv_generated_matrix_test_suite, basic) {
-    FILE* fp = fopen("subjects/basic.csv", "r");
-    matrix* pmatrix = new_csv_generated_matrix(fp, pstorage);
+    FILE* fp = fopen("/home/mehdi/linearC/tests/subjects/basic.csv", "r");
+    if(fp == NULL) {
+        perror("couldn't open file?");
+    }
 
+    matrix* pmatrix = new_csv_generated_matrix(fp, pstorage);
+    rewind(fp);
     char* curr_cell_as_str;
-    char* stop_cause;
+    char stop_cause;
     for(size_t row = 0; row < pmatrix->row_count; row++) {
         for(size_t col = 0; col < pmatrix->col_count; col++) {
-            curr_cell_as_str = csv_get_untill_delim(fp, stop_cause);
+            curr_cell_as_str = csv_get_untill_delim(fp, &stop_cause);
             element_type* curr_type = get_cell_type(pmatrix, row, col);
-            cr_assert(curr_type->matches_string(curr_cell_as_str));
+
+            element_type** types;
+            size_t type_count;
+            set_to_supported_element_types(&types, &type_count);
+            element_type* str_type  = get_element_type_from_str(curr_cell_as_str, types, type_count);
+            cr_assert(ge(int, element_type_eloquence_cmp(curr_type, str_type), 0));
             
             void* expected = curr_type->get_from_string(curr_cell_as_str);
             void* got = get_cell_address(pmatrix, row, col);

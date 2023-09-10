@@ -130,6 +130,6 @@ Test(get_untill_delim_test_suite, sets_dimensions) {
     expected_col = 3;
     set_dimensions(fp, &got_row, &got_col);
 
-    cr_expect(eq(uint, got_row, expected_row));
-    cr_expect(eq(uint, got_col, expected_col));
+    cr_expect(eq(int, (int) got_row, (int) expected_row));
+    cr_expect(eq(int, (int) got_col, (int) expected_col));
 }

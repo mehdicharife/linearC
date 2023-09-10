@@ -15,4 +15,4 @@ void int_element_type_set(void* tobesetted, void* pvalue);
 bool int_element_type_are_equal(void* px, void* py);
 bool int_element_type_matches_string(char* str);
 void* int_element_type_get_from_string(char* str);
-
+void int_element_type_print(void* pelement);

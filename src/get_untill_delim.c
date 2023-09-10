@@ -66,22 +66,24 @@ char* csv_get_untill_delim(FILE* fp, char* stop_cause_delimiter) {
 
 
 void set_dimensions(FILE* fp, size_t* prow, size_t* pcol) {
-    char* stop_cause;
+    rewind(fp);
+
+    char stop_cause;
     char* curr_str;
     *pcol = 0;
     *prow = 0;
 
-    while((curr_str = csv_get_untill_delim(fp, stop_cause)) != NULL) {
-        if(*stop_cause == '\n' || (*stop_cause == EOF && *prow > 0)) { (*prow)++; }
+    while((curr_str = csv_get_untill_delim(fp, &stop_cause)) != NULL) {
+        if(stop_cause == '\n' || stop_cause == EOF) { *prow = *prow + 1; }
     }
     rewind(fp);
 
-    while((curr_str = csv_get_untill_delim(fp, stop_cause)) != NULL) {
-        (*pcol)++;
-        if(*stop_cause == EOF || *stop_cause == '\n') {
+    while((curr_str = csv_get_untill_delim(fp, &stop_cause)) != NULL) {
+        *pcol = *pcol + 1;
+        if(stop_cause == EOF || stop_cause == '\n') {
             break;
         }
     }
 
-    return;
+    rewind(fp);
 }

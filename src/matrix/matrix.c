@@ -3,6 +3,8 @@
 #include "../../include/row_major_storage.h"
 #include "../../include/double_element_type.h"
 #include "../../include/type_per_track_distribution.h"
+#include "../../include/get_untill.h"
+
 
 void* get_cell_address(matrix* pmatrix, size_t row, size_t col) {
     return pmatrix->pstorage->get_cell_address(
@@ -129,11 +131,33 @@ matrix* new_row_major_double_matrix() {
 }
 
 matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage) {
-    //matrix* pmatrix = malloc(sizeof(matrix));
-    //pmatrix->pstorage = pstorage;
-    //type_distribution* pdsitr = new_type_distribution_from_csv_file(fp);
+    matrix* pmatrix = malloc(sizeof(matrix));
+    pmatrix->pstorage = pstorage;
+    pmatrix->pdistr = new_type_distribution_from_csv_file(fp);
 
-    return NULL;
+    size_t row_count, col_count;
+    set_dimensions(fp, &row_count, &col_count);
+    allocate_storage(pmatrix, row_count, col_count);
+   
+    element_type* curr_type;
+    char* curr_str;
+    void* curr_str_conversion;
+    char stop_cause;
+    for(size_t row = 0; row < row_count; row++) {
+        for(size_t col = 0; col < col_count; col++) {
+            curr_type = get_cell_type(pmatrix, row, col);
+            curr_str = csv_get_untill_delim(fp, &stop_cause);
+            curr_str_conversion = curr_type->get_from_string(curr_str);
+
+            set_cell(pmatrix, row, col, curr_str_conversion);
+            
+            free(curr_str_conversion);
+        }
+    }
+
+    rewind(fp);
+
+    return pmatrix;
 }
 
 

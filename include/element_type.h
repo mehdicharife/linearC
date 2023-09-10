@@ -22,7 +22,8 @@
         void* (*multiply)(void* elem1, void* elem2);
         void (*set)(void* ptobesetted, void* pvalue);
         bool (*matches_string)(char* str);
-        void* (*get_from_string)(char* str);        
+        void* (*get_from_string)(char* str); 
+        void (*print)(void* pelement);       
     }; 
 
 

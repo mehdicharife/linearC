@@ -22,6 +22,7 @@ element_type* new_double_element_type() {
         ptype->set = double_element_type_set;
         ptype->matches_string = double_element_type_matches_string;
         ptype->get_from_string = double_element_type_get_from_string;
+        ptype->print = double_element_type_print;
     }
 
     return ptype;
@@ -92,4 +93,9 @@ void* double_element_type_get_from_string(char* str) {
     double* px = malloc(sizeof(double));
     sscanf(str, "%lf", px);
     return (void*) px;
+}
+
+
+void double_element_type_print(void* pelement) {
+    printf("%lf\n",  *((double*) pelement));
 }
