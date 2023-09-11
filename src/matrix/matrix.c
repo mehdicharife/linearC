@@ -147,10 +147,10 @@ matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage) {
         for(size_t col = 0; col < col_count; col++) {
             curr_type = get_cell_type(pmatrix, row, col);
             curr_str = csv_get_untill_delim(fp, &stop_cause);
+            
             curr_str_conversion = curr_type->get_from_string(curr_str);
 
             set_cell(pmatrix, row, col, curr_str_conversion);
-            
             free(curr_str_conversion);
         }
     }
