@@ -1,8 +1,8 @@
-#include "../include/element_type_eloquence_cmp.h"
+#include "../../include/element_type_eloquence_cmp.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/utils.h"
+#include "../../include/utils.h"
 
 
 element_type* new_least_eloquent() {

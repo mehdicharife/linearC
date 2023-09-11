@@ -1,10 +1,10 @@
 #include <assert.h>
 #include <stdlib.h>
-#include "../include/element_type.h"
-#include "../include/double_element_type.h"
-#include "../include/int_element_type.h"
-#include "../include/get_untill.h"
-#include "../include/element_type_eloquence_cmp.h"
+#include "../../include/element_type.h"
+#include "../../include/double_element_type.h"
+#include "../../include/int_element_type.h"
+#include "../../include/get_untill.h"
+#include "../../include/element_type_eloquence_cmp.h"
 
 void set_to_supported_element_types(element_type*** parr, size_t* parray_size) {
     *parray_size = 2;
