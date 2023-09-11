@@ -20,15 +20,12 @@ TestSuite(new_csv_generated_matrix_test_suite, .init=setup);
 
 
 
-#define FILES_COUNT 3
-#define FILES_PATHS (char*[]) {"/home/mehdi/linearC/tests/subjects/mixed.csv", \
-                               "/home/mehdi/linearC/tests/subjects/uniform_int.csv", \
-                               "/home/mehdi/linearC/tests/subjects/type_per_col.csv" \
-}
+#define FILES_COUNT 1
+#define FILES_PATHS (char*[]) {"/home/mehdi/linearC/tests/subjects/uniform_str.csv"}
 ParameterizedTestParameters(new_csv_generated_matrix_test_suite, creates_matrix_from_csv_file) {
     static char* files_paths[FILES_COUNT];
     for(size_t k = 0; k < FILES_COUNT; k++) {
-        files_paths[k] = cr_malloc(strlen(FILES_PATHS[k]));
+        files_paths[k] = cr_malloc(strlen(FILES_PATHS[k]) + 1);
         strcpy(files_paths[k], FILES_PATHS[k]);
     }
 
@@ -39,6 +36,7 @@ ParameterizedTestParameters(new_csv_generated_matrix_test_suite, creates_matrix_
 
 ParameterizedTest(char** p_test_file_path, new_csv_generated_matrix_test_suite, creates_matrix_from_csv_file) {
     FILE* fp = fopen(*p_test_file_path, "r");
+    
     if(fp == NULL) {
         perror("couldn't open file?");
     }
@@ -52,7 +50,6 @@ ParameterizedTest(char** p_test_file_path, new_csv_generated_matrix_test_suite, 
         for(size_t col = 0; col < pmatrix->col_count; col++) {
             curr_cell_as_str = csv_get_untill_delim(fp, &stop_cause);
             element_type* curr_type = get_cell_type(pmatrix, row, col);
-
 
             element_type** types;
             size_t type_count;

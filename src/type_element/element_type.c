@@ -3,14 +3,16 @@
 #include "../../include/element_type.h"
 #include "../../include/double_element_type.h"
 #include "../../include/int_element_type.h"
+#include "../../include/string_element_type.h"
 #include "../../include/get_untill.h"
 #include "../../include/element_type_eloquence_cmp.h"
 
 void set_to_supported_element_types(element_type*** parr, size_t* parray_size) {
-    *parray_size = 2;
+    *parray_size = 3;
     *parr = malloc(*parray_size*sizeof(element_type*));
     (*parr)[0] = new_double_element_type();
     (*parr)[1] = new_int_element_type();
+    (*parr)[2] = new_string_element_type();
 }
 
 element_type* get_element_type_from_str(char* str, element_type** types, size_t type_count) {
