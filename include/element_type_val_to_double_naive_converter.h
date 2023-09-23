@@ -1,0 +1,16 @@
+#ifndef ELEMENT_TYPE_VAL_TO_DOUBLE_NAIVE_CONVERTER_H
+#define ELEMENT_TYPE_VAL_TO_DOUBLE_NAIVE_CONVERTER_H
+
+#include "element_type_val_to_double_converter.h"
+
+typedef struct element_type_to_double_converter element_type_to_double_converter;
+typedef struct element_type_visitor element_type_visitor;
+typedef struct element_type element_type;
+
+element_type_val_to_double_converter* new_element_type_val_to_double_naive_converter(void);
+
+void element_type_to_double_naive_converter_visit_double_element_type(element_type_visitor* pvisitor, element_type* ptype);
+void element_type_to_double_naive_converter_visit_int_element_type(element_type_visitor* pvisitor, element_type* ptype);
+void element_type_to_double_naive_converter_visit_string_element_type(element_type_visitor* pvisitor, element_type* ptype);
+
+#endif

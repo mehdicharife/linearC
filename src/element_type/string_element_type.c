@@ -23,6 +23,7 @@ element_type* new_string_element_type() {
         ptype->matches_string = string_element_type_matches_string;
         ptype->get_from_string = string_element_type_get_from_string;
         ptype->print = string_element_type_print;
+        ptype->accept = string_element_type_accept;
 
         ptype->add = NULL;
         ptype->subtract = NULL;
@@ -80,5 +81,10 @@ void* string_element_type_get_from_string(char* str) {
 
 void string_element_type_print(void* pelement) {
     printf("%s\n",  *((char**) pelement));
+}
+
+
+void string_element_type_accept(element_type* ptype, element_type_visitor* pvisitor) {
+    pvisitor->visit_string(pvisitor, ptype);
 }
 

@@ -11,6 +11,8 @@ struct type_per_track_distribution {
     track_kind tkind;
     element_type** types;
     size_t type_count;
+
+    size_t (*get_jth_track_index_of_type)(type_per_track_distribution* pthis, element_type* ptype);
 };
 
 type_distribution* new_type_per_track_distribution(track_kind tkind, element_type** types, size_t type_count);

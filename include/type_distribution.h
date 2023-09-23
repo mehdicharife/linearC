@@ -39,6 +39,8 @@
 
         type_distribution_kind (*get_kind)(void);
         bool (*equals)(type_distribution* pthis, type_distribution* pother);
+        size_t (*get_jth_col_where_typeof_row_is)(element_type* ptype, size_t row, size_t j);
+
     };
 
     size_t get_track_size(type_distribution* pdistr, size_t row_count, size_t col_count, track_kind tkind, size_t track_id);

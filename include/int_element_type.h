@@ -1,5 +1,7 @@
 #include "element_type.h"
+#include <stdbool.h>
 
+typedef struct element_type_visitor element_type_visitor;
 
 element_type* new_int_element_type();
 
@@ -16,3 +18,4 @@ bool int_element_type_are_equal(void* px, void* py);
 bool int_element_type_matches_string(char* str);
 void* int_element_type_get_from_string(char* str);
 void int_element_type_print(void* pelement);
+void int_element_type_accept(element_type* pthis, element_type_visitor* pvisitor);

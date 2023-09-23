@@ -5,14 +5,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-element_type* new_int_element_type() {
+#define NAME "int"
+element_type* new_int_element_type_custom_malloc(void*(*custom_malloc)(size_t)) {
     static element_type* ptype = NULL;
 
     if(ptype == NULL) {
-        ptype = (element_type*) malloc(sizeof(element_type));
+        ptype = (element_type*) custom_malloc(sizeof(element_type));
 
         ptype->size = sizeof(int);
-        ptype->name = "int";
+        ptype->name = custom_malloc(strlen(NAME) + 1);
+        strcpy(ptype->name, NAME);
         ptype->pointer_addition = int_element_type_pointer_addition;
         ptype->add = int_element_type_add;
         ptype->subtract = int_element_type_substract;
@@ -23,9 +25,14 @@ element_type* new_int_element_type() {
         ptype->matches_string = int_element_type_matches_string;
         ptype->get_from_string = int_element_type_get_from_string;
         ptype->print = int_element_type_print;
+        ptype->accept = int_element_type_accept;
     }
 
-    return ptype;
+    return ptype;    
+}
+
+element_type* new_int_element_type() {
+    return new_int_element_type_custom_malloc(malloc);
 }
 
 void* int_element_type_pointer_addition(void* ptr, size_t offset) {
@@ -89,4 +96,9 @@ void* int_element_type_get_from_string(char* str) {
 
 void int_element_type_print(void* pelement) {
     printf("%d\n", *((int*) pelement));
+}
+
+
+void int_element_type_accept(element_type* ptype, element_type_visitor* pvisitor) {
+    pvisitor->visit_int(pvisitor, ptype);
 }

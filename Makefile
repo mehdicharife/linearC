@@ -50,7 +50,7 @@ $(TESTS_DIR)/bin :
 	mkdir $@
 
 $(TESTS_DIR)/bin/% : $(TESTS_DIR)/%.c
-	@$(CC) $(CFLAGS) $< $(OBJ_FILES_PATHS) -o $@ -lcriterion
+	@$(CC) $(CFLAGS) $< $(OBJ_FILES_PATHS) -o $@ -lcriterion -lm
 
 
 

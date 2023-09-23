@@ -1,9 +1,11 @@
 #ifndef ELEMENT_TYPE_H
     #define ELEMENT_TYPE_H
+    
 
     #include <stddef.h>
     #include <stdbool.h>
     #include <stdio.h>
+    #include "element_type_visitor.h"
 
     typedef struct element_type element_type;
     typedef struct element element;
@@ -23,7 +25,8 @@
         void (*set)(void* ptobesetted, void* pvalue);
         bool (*matches_string)(char* str);
         void* (*get_from_string)(char* str); 
-        void (*print)(void* pelement);       
+        void (*print)(void* pelement);      
+        void (*accept)(element_type* pthis, element_type_visitor* pvisitor);
     }; 
 
 
@@ -37,5 +40,6 @@
     
     element_type* get_element_type_from_str(char* str, element_type** types, size_t type_count);
     void set_element_types_from_csv_file(element_type*** types, size_t* ptype_count, FILE* fp);
+    
 
 #endif

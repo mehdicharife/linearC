@@ -7,6 +7,7 @@
 #include "../../include/get_untill.h"
 #include "../../include/element_type_eloquence_cmp.h"
 
+
 void set_to_supported_element_types(element_type*** parr, size_t* parray_size) {
     *parray_size = 3;
     *parr = malloc(*parray_size*sizeof(element_type*));
@@ -58,4 +59,8 @@ void set_element_types_from_csv_file(element_type*** types, size_t* ptype_count,
         
     }
 }
+
+
+
+
 

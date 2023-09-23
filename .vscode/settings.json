@@ -1,12 +1,26 @@
 {
-    "C_Cpp.errorSquiggles": "disabled",
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "gcc-x64",
+            "browse": {
+                "path": ["${workspaceFolder}"],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+              }
+        }
+    ],
+    "version": 4,
     "files.associations": {
-        "double_element_type.c": "cpp",
-        "double_element_type.h": "c",
-        "variant": "cpp",
-        "type_per_col_distribution.h": "c",
-        "memory": "c",
-        "assert.h": "c",
-        "int_element_type.h": "c"
+        "element_type_val_to_double_converter.h": "c",
+        "stdio.h": "c",
+        "memory": "c"
     }
 }

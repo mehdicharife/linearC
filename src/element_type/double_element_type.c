@@ -23,6 +23,7 @@ element_type* new_double_element_type() {
         ptype->matches_string = double_element_type_matches_string;
         ptype->get_from_string = double_element_type_get_from_string;
         ptype->print = double_element_type_print;
+        ptype->accept = double_element_type_accept;
     }
 
     return ptype;
@@ -89,6 +90,7 @@ bool double_element_type_matches_string(char* str) {
     return dotted && digits_after_dot;
 }
 
+// consider handling cases like "\"1.23\""
 void* double_element_type_get_from_string(char* str) {
     double* px = malloc(sizeof(double));
     sscanf(str, "%lf", px);
@@ -98,4 +100,9 @@ void* double_element_type_get_from_string(char* str) {
 
 void double_element_type_print(void* pelement) {
     printf("%lf\n",  *((double*) pelement));
+}
+
+
+void double_element_type_accept(element_type* ptype, element_type_visitor* pvisitor) {
+    pvisitor->visit_double(pvisitor, ptype);
 }

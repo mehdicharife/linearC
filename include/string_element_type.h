@@ -1,5 +1,6 @@
 #include "element_type.h"
 
+typedef struct element_type_visitor element_type_visitor;
 
 element_type* new_string_element_type();
 
@@ -14,3 +15,4 @@ bool string_element_type_are_equal(void* str1, void* str2);
 bool string_element_type_matches_string(char* str);
 void* string_element_type_get_from_string(char* str);
 void string_element_type_print(void* pelement);
+void string_element_type_accept(element_type* ptype, element_type_visitor* pvisitor);

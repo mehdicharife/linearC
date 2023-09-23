@@ -1,5 +1,6 @@
 #include "element_type.h"
 
+typedef struct element_type_visitor element_type_visitor;
 
 element_type* new_double_element_type();
 
@@ -16,3 +17,4 @@ bool double_element_type_are_equal(void* px, void* py);
 bool double_element_type_matches_string(char* str);
 void* double_element_type_get_from_string(char* str);
 void double_element_type_print(void* pelement);
+void double_element_type_accept(element_type* ptype, element_type_visitor* pvisitor);
