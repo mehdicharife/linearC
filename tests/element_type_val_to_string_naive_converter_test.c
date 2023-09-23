@@ -63,7 +63,7 @@ ParameterizedTestParameters(element_type_val_to_string_naive_converter_test_suit
 ParameterizedTest(struct conversion_parameters *params, element_type_val_to_string_naive_converter_test_suite, converts_doubles) {
     element_type* ptype = new_double_element_type();
 
-    char* actual = get_element_type_val_as_string(params->pval, ptype, (element_type_val_to_string_converter*) pconverter);
+    char* actual = get_element_type_val_as_string(params->pval, ptype, pconverter);
     cr_assert(eq(str, actual, params->expected));
 }
 
@@ -86,7 +86,7 @@ ParameterizedTestParameters(element_type_val_to_string_naive_converter_test_suit
 
 ParameterizedTest(struct conversion_parameters *params, element_type_val_to_string_naive_converter_test_suite, converts_strings) {
     element_type* ptype = new_string_element_type();
-
-    char* actual = get_element_type_val_as_string(params->pval, ptype, (element_type_val_to_string_converter*) pconverter);
+    pconverter->input = NULL;
+    char* actual = get_element_type_val_as_string(params->pval, ptype, pconverter);
     cr_assert(eq(str, actual, params->expected));
 }

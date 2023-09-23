@@ -85,6 +85,7 @@ void string_element_type_print(void* pelement) {
 
 
 void string_element_type_accept(element_type* ptype, element_type_visitor* pvisitor) {
+    
     pvisitor->visit_string(pvisitor, ptype);
 }
 
