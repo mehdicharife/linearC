@@ -7,7 +7,7 @@
 element_type_val_to_int_converter* new_element_type_val_to_int_naive_converter() {
     static element_type_val_to_int_converter* ret = NULL;
     if(ret == NULL) {
-        element_type_val_to_int_converter* ret = malloc(sizeof(element_type_val_to_int_converter*));
+        ret = malloc(sizeof(element_type_val_to_int_converter));
 
         ret->parent.visit_int = element_type_to_int_naive_converter_visit_int_element_type;
         ret->parent.visit_double = element_type_to_int_naive_converter_visit_double_element_type;
@@ -30,5 +30,5 @@ void element_type_to_int_naive_converter_visit_string_element_type(element_type_
 
 void element_type_to_int_naive_converter_visit_int_element_type(element_type_visitor* pvisitor, element_type* ptype) {
     element_type_val_to_int_converter* pconverter = (element_type_val_to_int_converter*) pvisitor;
-    pconverter->conversion = (int) *((int*) pconverter->input);
+    pconverter->conversion =  *((int*) pconverter->input);
 }

@@ -21,6 +21,7 @@
     "files.associations": {
         "element_type_val_to_double_converter.h": "c",
         "stdio.h": "c",
-        "memory": "c"
+        "memory": "c",
+        "element_type_val_to_int_naive_converter.h": "c"
     }
 }
