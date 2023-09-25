@@ -32,19 +32,23 @@ element_type* type_per_track_distribution_get_cell_type(type_distribution* pdist
 }
 
 
-size_t type_per_track_distribution_total_size_before(type_distribution* pdistr, size_t row_count, size_t col_count, spatial_order* porder, size_t row, size_t col) {
+size_t type_per_track_distribution_total_size_before(type_distribution* pdistr, size_t row_count, size_t col_count, spatial_order* porder, size_t row_i, size_t col_i) {
 
+    
     size_t main_track_size = get_track_size(pdistr, row_count, col_count, porder->first_track, 0);
-    size_t main_track_count = (porder->first_track == row) ? row : col;
-    size_t secondary_track_index = (porder->first_track == row) ? col : row;
+    size_t main_track_count = (porder->first_track == row) ? row_i : col_i;
+    size_t secondary_track_index = (porder->first_track == row) ? col_i : row_i;
     size_t remainder_size = get_sub_track_size(pdistr, row_count, col_count, porder->first_track, main_track_count, 0, secondary_track_index);
 
+    
 
     return main_track_count*main_track_size + remainder_size;
 }
 
 
 size_t type_per_track_distribution_get_sub_track_size(type_distribution* pdistr, size_t row_count, size_t col_count, track_kind tkind, size_t track_id, size_t start, size_t end) {
+
+    //printf("haaaaaaaaa\n");
     size_t ret_size;
     type_per_track_distribution* pdistribution = (type_per_track_distribution*) pdistr;
     size_t secondary_track_count = (end - start + 1);

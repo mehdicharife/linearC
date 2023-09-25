@@ -16,5 +16,6 @@ void* row_major_storage_get_cell_address(void* data, type_distribution* pdistr, 
 
 void row_major_storage_allocate(void** pdata, type_distribution* pdistr, size_t row_count, size_t col_count) {
     size_t total_size = pdistr->total_size_before(pdistr, row_count, col_count, lexicographical(), row_count, 0);
+    //printf("\n\n\nOut The Bowl\n\n\n");
     *pdata = malloc(total_size);
 }

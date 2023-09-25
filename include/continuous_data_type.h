@@ -11,7 +11,7 @@ struct continuous_data_type {
     /* tell don't ask
     double (*get_value)(continuous_data_type* pthis);
     void (*set_value_to)(continuous_data_type* pthis, double val);*/ 
-    size_t (*compare_to)(continuous_data_type* pthis, continuous_data_type* pother); //consider visitor pattern
+    double (*compare_to)(continuous_data_type* pthis, continuous_data_type* pother);
 };
 
 

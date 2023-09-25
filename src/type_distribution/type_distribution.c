@@ -45,9 +45,14 @@ type_distribution* new_type_distribution_from_types_array(element_type** array, 
         if(array[k] != array[k + 1]) { is_uniform = false; break;} 
     }
 
+    
+
     if(is_uniform) {
+
         return new_uniform_type_distribution(array[0]);
     }
+
+    
 
     return new_type_per_track_distribution(col, array, type_count);
 }
@@ -58,6 +63,8 @@ type_distribution* new_type_distribution_from_csv_file(FILE* fp) {
     size_t type_count;
     element_type** types;
     set_element_types_from_csv_file(&types, &type_count, fp);
+
+    
 
     return new_type_distribution_from_types_array(types, type_count);
 }

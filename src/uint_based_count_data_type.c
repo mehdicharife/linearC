@@ -1,5 +1,6 @@
 #include "../include/uint_based_count_data_type.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 count_data_type* new_uint_based_count_data_type(size_t val) {
     uint_based_count_data_type* ret = malloc(sizeof(uint_based_count_data_type));

@@ -22,7 +22,10 @@ element_type* get_cell_type(matrix* pmatrix, size_t row, size_t col) {
 }
 
 void allocate_storage(matrix* pmatrix, size_t row_count, size_t col_count) {
+    
     pmatrix->pstorage->allocate_storage(&(pmatrix->data), pmatrix->pdistr, row_count, col_count);
+
+
     pmatrix->row_count = row_count;
     pmatrix->col_count = col_count;
 }
@@ -135,9 +138,11 @@ matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage) {
     pmatrix->pstorage = pstorage;
     pmatrix->pdistr = new_type_distribution_from_csv_file(fp);
 
+
     size_t row_count, col_count;
     set_dimensions(fp, &row_count, &col_count);
     allocate_storage(pmatrix, row_count, col_count);
+      
    
     element_type* curr_type;
     char* curr_str;
@@ -156,6 +161,7 @@ matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage) {
     }
 
     rewind(fp);
+
 
     return pmatrix;
 }

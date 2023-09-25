@@ -42,7 +42,7 @@ void string_element_type_set(void* tobesetted, void* pvalue) {
     assert(tobesetted != NULL && pvalue != NULL);
     char** pdestination = tobesetted;
     char** psource = pvalue;
-    *pdestination = malloc(strlen(*psource));
+    *pdestination = malloc(strlen(*psource) + 1);
     strcpy(*pdestination, *psource);
 }
 

@@ -40,6 +40,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 
+test-build : $(LIB_FILE) $(TESTS_DIR) $(TESTS_DIR)/bin  $(TESTS_BINS)
+
 test : $(LIB_FILE) $(TESTS_DIR) $(TESTS_DIR)/bin  $(TESTS_BINS)
 	for test in $(TESTS_BINS) ; do ./$$test --verbose ; done
 
@@ -49,8 +51,10 @@ $(TESTS_DIR) :
 $(TESTS_DIR)/bin : 
 	mkdir $@
 
+
 $(TESTS_DIR)/bin/% : $(TESTS_DIR)/%.c
 	@$(CC) $(CFLAGS) $< $(OBJ_FILES_PATHS) -o $@ -lcriterion -lm
+
 
 
 

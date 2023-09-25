@@ -6,7 +6,7 @@
 #include "../../include/string_element_type.h"
 #include "../../include/get_untill.h"
 #include "../../include/element_type_eloquence_cmp.h"
-
+#include <unistd.h>
 
 void set_to_supported_element_types(element_type*** parr, size_t* parray_size) {
     *parray_size = 3;
@@ -37,7 +37,7 @@ void set_element_types_from_csv_file(element_type*** types, size_t* ptype_count,
     char delimiters[] = {',', '\n'};
     size_t delimiters_count = 2;
 
-    size_t type_count = 10;
+    size_t type_count = 12;
     *types = malloc(type_count*sizeof(element_type*));
     size_t curr_type_index = 0;
     set_to_least_eloquent(*types, type_count);
@@ -45,6 +45,8 @@ void set_element_types_from_csv_file(element_type*** types, size_t* ptype_count,
     char* curr_str;
     char stop_cause;
     while((curr_str = get_untill_delim(fp, delimiters, delimiters_count, &stop_cause)) != NULL) {
+
+
         (*types)[curr_type_index] = get_most_eloquent_type(
             (*types)[curr_type_index],
             get_element_type_from_str(curr_str, supported_types, supported_types_count)
@@ -58,6 +60,7 @@ void set_element_types_from_csv_file(element_type*** types, size_t* ptype_count,
         }
         
     }
+
 }
 
 

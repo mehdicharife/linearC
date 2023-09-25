@@ -12,7 +12,7 @@ enum statistical_data_type {
     ordinal,
     nominal,
     binary,
-    undefined,
+    undefined
 };
 
 typedef enum statistical_data_type statistical_data_type;
