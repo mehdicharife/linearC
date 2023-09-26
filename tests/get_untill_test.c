@@ -2,6 +2,8 @@
 #include <criterion/new/assert.h>
 #include "../include/get_untill.h"
 #include <stdio.h>
+#include "../include/string_element_type.h"
+#include <unistd.h>
 
 
 char delimiters[2] = {',', '\n'};
@@ -66,10 +68,18 @@ Test(get_untill_delim_test_suite, stops_at_new_line) {
 Test(get_untill_delim_test_suite, handles_delimiter_inside_quotes) {
     char* expected = "\"Braund, Mr. Owen Harris\"";
     FILE* fp = tmpfile();
+    fputs("1,0,3,", fp);
     fputs(expected, fp);
+    fputs(",male,22,1,0,A/5 21171,7.25,,S", fp);
     rewind(fp);
 
-    char* got = get_untill_delim(fp, delimiters, delimiters_count, NULL);
+    char* got;
+    for(size_t k = 0; k < 4; k++) {
+        got = get_untill_delim(fp, delimiters, delimiters_count, NULL);
+        //new_string_element_type()->print(&got);
+        //sleep(1);
+    }
+    
 
     cr_assert(eq(str, got, expected));
 }
@@ -119,6 +129,7 @@ Test(get_untill_delim_test_suite, can_be_used_to_make_exact_copy_of_file) {
     fclose(copy);
 } 
 */
+
 
 Test(get_untill_delim_test_suite, sets_dimensions) {
     FILE* fp = tmpfile();

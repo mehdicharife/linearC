@@ -4,7 +4,7 @@
 #include "../../include/double_element_type.h"
 #include "../../include/type_per_track_distribution.h"
 #include "../../include/get_untill.h"
-
+#include <unistd.h>
 
 void* get_cell_address(matrix* pmatrix, size_t row, size_t col) {
     return pmatrix->pstorage->get_cell_address(
@@ -152,8 +152,12 @@ matrix* new_csv_generated_matrix(FILE* fp, storage* pstorage) {
         for(size_t col = 0; col < col_count; col++) {
             curr_type = get_cell_type(pmatrix, row, col);
             curr_str = csv_get_untill_delim(fp, &stop_cause);
+            //printf("%s\n", curr_str);
+            
             
             curr_str_conversion = curr_type->get_from_string(curr_str);
+            //curr_type->print(curr_str_conversion);
+            //sleep(1);
 
             set_cell(pmatrix, row, col, curr_str_conversion);
             free(curr_str_conversion);

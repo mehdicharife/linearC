@@ -41,5 +41,5 @@ void element_type_val_to_string_naive_converter_visit_int_element_type(element_t
 
 void element_type_val_to_string_naive_converter_visit_string_element_type(element_type_visitor* pvisitor, element_type* ptype) {
     element_type_val_to_string_converter* pconverter = (element_type_val_to_string_converter*) pvisitor;
-    pconverter->conversion = pconverter->input;
+    pconverter->conversion = *((char**) pconverter->input);
 }

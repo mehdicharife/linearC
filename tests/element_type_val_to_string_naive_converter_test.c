@@ -74,9 +74,9 @@ ParameterizedTest(struct conversion_parameters *params, element_type_val_to_stri
 ParameterizedTestParameters(element_type_val_to_string_naive_converter_test_suite, converts_strings) { 
     static struct conversion_parameters params[5];
     for(size_t k = 0; k < STR_VALUES_COUNT; k++) {
-        params[k].pval = cr_malloc(sizeof(double));
-        params[k].pval = cr_malloc(strlen(STR_VALUES[k]) + 1);
-        strcpy(params[k].pval, STR_VALUES[k]);
+        params[k].pval = cr_malloc(sizeof(char**));
+        *((char**) params[k].pval) = cr_malloc(strlen(STR_VALUES[k]) + 1);
+        strcpy(*((char**) params[k].pval), STR_VALUES[k]);
 
         params[k].expected = cr_malloc(strlen(STR_STRINGS[k]) + 1);
         strcpy(params[k].expected, STR_STRINGS[k]);

@@ -11,8 +11,8 @@ continuous_data_type* new_double_based_continuous_data_type(double x) {
 }
 
 double double_based_continuous_data_type_compare_to(continuous_data_type* ptr1, continuous_data_type* ptr2) {
-    double_based_continuous_data_type* cptr1 = ptr1;
-    double_based_continuous_data_type* cptr2 = ptr2;
+    double_based_continuous_data_type* cptr1 = (double_based_continuous_data_type*) ptr1;
+    double_based_continuous_data_type* cptr2 = (double_based_continuous_data_type*) ptr2;
     
     return cptr1->val - cptr2->val;
 }

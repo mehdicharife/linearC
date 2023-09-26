@@ -24,7 +24,7 @@ TestSuite(new_csv_generated_matrix_test_suite, .init=setup);
 #define FILES_PATHS (char*[]) {"/home/mehdi/linearC/tests/subjects/uniform_str.csv", \
                                "/home/mehdi/linearC/tests/subjects/uniform_int.csv", \
                                "/home/mehdi/linearC/tests/subjects/type_per_col.csv", \
-                               "/home/mehdi/linearC/tests/subjects/mixed.csv" \
+                               "/home/mehdi/linearC/tests/subjects/titanic.csv" \
 }
 ParameterizedTestParameters(new_csv_generated_matrix_test_suite, creates_matrix_from_csv_file) {
     static char* files_paths[FILES_COUNT];

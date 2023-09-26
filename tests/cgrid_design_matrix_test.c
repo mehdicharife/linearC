@@ -16,6 +16,7 @@
 #include "../include/string_based_nominal_data_type.h"
 #include "../include/uint_based_count_data_type.h"
 #include "../include/double_based_continuous_data_type.h"
+#include <unistd.h>
 
 void set_feature_type_and_order_based_on_col_index(cgrid_design_matrix* pmatrix, size_t col, statistical_data_type* ptype, size_t* porder);
 
@@ -48,7 +49,7 @@ Test(cgrid_design_matrix_test_suite, sum_of_features_is_col_count) {
 
 
 Test(cgrid_design_matrix_test_suite, cells_correspondance) {
-    cgrid_design_matrix* pmatrix = new_cgrid_design_matrix(pcgrid, pmapper);
+    cgrid_design_matrix* pmatrix = (cgrid_design_matrix*) new_cgrid_design_matrix(pcgrid, pmapper);
     for(size_t j = 0; j < pmatrix->pgrid->col_count; j++) {
         
         statistical_data_type type;
@@ -87,11 +88,19 @@ Test(cgrid_design_matrix_test_suite, cells_correspondance) {
                 
                 case nominal:
                     nominal_data_type* nominal_pgot = pmatrix->parent.get_val_of_nominal_feature(&(pmatrix->parent), i, ft_inner_index);
-                    char* curr_cell_as_string = get_element_type_val_as_string(cell_address, ptype, new_element_type_val_to_string_naive_converter());
+
+                   
+                    char* curr_cell_as_string = get_element_type_val_as_string(cell_address, ptype, pmatrix->pto_string_converter);
+                    
                     nominal_data_type* nominal_pexpected = new_string_based_nominal_data_type(curr_cell_as_string);
                     int comparison_result = nominal_pgot->compare_to(nominal_pgot, nominal_pexpected);
+                    //printf("nominal: (%ld, %ld) : %s\n", i, j, curr_cell_as_string);
+                    //sleep(1);
                     cr_assert(eq(int, comparison_result, 0));
                     break;
+                
+                default:
+                    continue;
                 
             }
             

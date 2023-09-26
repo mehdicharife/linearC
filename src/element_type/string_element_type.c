@@ -74,7 +74,7 @@ void* string_element_type_get_from_string(char* str) {
 
     char** ret = malloc(sizeof(char**));
     *ret = malloc(strlen(str) + 1); 
-    sscanf(str, "%s", *ret);
+    sscanf(str, "%[^\n]", *ret);
     return (void*) ret;
 }
 
