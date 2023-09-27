@@ -38,6 +38,8 @@ void setup() {
 TestSuite(cgrid_design_matrix_test_suite, .init=setup);
 
 
+
+
 Test(cgrid_design_matrix_test_suite, sum_of_features_is_col_count) {
     design_matrix* pmatrix = new_cgrid_design_matrix(pcgrid, pmapper);
     size_t expected = pmatrix->continuous_features_count + pmatrix->nominal_features_count + 
@@ -70,8 +72,7 @@ Test(cgrid_design_matrix_test_suite, cells_correspondance) {
                     break;
                 
                 
-                case count:
-                    
+                case count:        
                     count_data_type* count_pgot = pmatrix->parent.get_val_of_count_feature(&(pmatrix->parent), i, ft_inner_index);
                     
                     element_type_val_to_int_converter* to_int_pconverter = new_element_type_val_to_int_naive_converter();
@@ -88,14 +89,12 @@ Test(cgrid_design_matrix_test_suite, cells_correspondance) {
                 
                 case nominal:
                     nominal_data_type* nominal_pgot = pmatrix->parent.get_val_of_nominal_feature(&(pmatrix->parent), i, ft_inner_index);
-
-                   
+       
                     char* curr_cell_as_string = get_element_type_val_as_string(cell_address, ptype, pmatrix->pto_string_converter);
                     
                     nominal_data_type* nominal_pexpected = new_string_based_nominal_data_type(curr_cell_as_string);
                     int comparison_result = nominal_pgot->compare_to(nominal_pgot, nominal_pexpected);
-                    //printf("nominal: (%ld, %ld) : %s\n", i, j, curr_cell_as_string);
-                    //sleep(1);
+
                     cr_assert(eq(int, comparison_result, 0));
                     break;
                 
@@ -115,16 +114,3 @@ Test(cgrid_design_matrix_test_suite, cells_correspondance) {
 
 
 
-
-
-
-/*
-Test(cgrid_design_matrix_test_suite, first_cell_correspondance) {
-    design_matrix* pmatrix = new_cgrid_design_matrix(pcgrid, pmapper);
-    statistical_data_type type;
-    size_t ft_inner_index;
-    set_feature_type_and_order_based_on_col_index((cgrid_design_matrix*) pmatrix, 9, &type, &ft_inner_index);
-
-    cr_assert(eq(int, type, continuous));
-}
-*/

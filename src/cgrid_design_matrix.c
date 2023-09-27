@@ -14,9 +14,6 @@ size_t get_statistical_data_type_count(cgrid_design_matrix* pmatrix, statistical
 //If you have a function that accepts an argument of a certain type, and you assert a certain condition on that argument at the start of
 // the function, consider creating a subtype that corresponds to the expectation of your function
 design_matrix* new_cgrid_design_matrix(matrix* pmatrix, element_type_to_statistical_type_mapper* pmapper) {
-    //assert(pmatrix->pdistr->get_kind() == uniform || pmatrix->pdistr->get_kind() == type_per_track);
-
-
     cgrid_design_matrix* ret = malloc(sizeof(cgrid_design_matrix));
     ret->pgrid = pmatrix;
     ret->pmapper = pmapper;
@@ -25,8 +22,9 @@ design_matrix* new_cgrid_design_matrix(matrix* pmatrix, element_type_to_statisti
     ret->pto_int_converter = new_element_type_val_to_int_naive_converter();
     ret->pto_string_converter = new_element_type_val_to_string_naive_converter();
 
-    ret->statistical_types = malloc(sizeof(statistical_data_type)*pmatrix->col_count);
-    for(size_t k = 0; k < pmatrix->col_count; k++) {
+    size_t col_count = (pmatrix == NULL) ? 0 : pmatrix->col_count;
+    ret->statistical_types = malloc(sizeof(statistical_data_type)*col_count);
+    for(size_t k = 0; k < col_count; k++) {
         ret->statistical_types[k] = undefined;
     }
      
@@ -91,7 +89,7 @@ int get_jth_statistical_feature_index_of_type(cgrid_design_matrix* pmatrix, stat
             continue; 
         }
 
-        if(get_statistical_data_type(get_cell_type(pmatrix->pgrid, 0, k), pmatrix->pmapper) == ptype) {
+        if(get_statistical_data_type_from_element_type(get_cell_type(pmatrix->pgrid, 0, k), pmatrix->pmapper) == ptype) {
             count++;
         }
 
@@ -134,4 +132,17 @@ void set_feature_type_and_order_based_on_col_index(cgrid_design_matrix* pmatrix,
             }
         }
     }
+}
+
+
+statistical_data_type get_statistical_data_type_of_col(cgrid_design_matrix* pmatrix, size_t col_index) {
+    if(pmatrix->statistical_types[col_index] != undefined) {
+        return pmatrix->statistical_types[col_index];
+    }
+
+    matrix* cgrid = pmatrix->pgrid;
+    element_type* ptype = get_cell_type(cgrid, 0, col_index);//
+    element_type_to_statistical_type_mapper* pmapper = pmatrix->pmapper;
+
+    return get_statistical_data_type_from_element_type(ptype, pmapper);//
 }

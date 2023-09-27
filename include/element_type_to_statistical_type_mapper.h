@@ -11,7 +11,7 @@ struct element_type_to_statistical_type_mapper {
     statistical_data_type type;
 };
 
-statistical_data_type get_statistical_data_type(element_type* ptype, element_type_to_statistical_type_mapper* pmapper);
+statistical_data_type get_statistical_data_type_from_element_type(element_type* ptype, element_type_to_statistical_type_mapper* pmapper);
 
 
 #endif

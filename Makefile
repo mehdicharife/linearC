@@ -23,6 +23,7 @@ TESTS_BINS = $(patsubst $(TESTS_DIR)/%.c, $(TESTS_DIR)/bin/%, $(TEST_FILES))
 LIB_DIR = lib
 LIB_FILE = $(LIB_DIR)/lib.a
 
+age = 25
 
 
 all: $(LIB_FILE)
@@ -53,8 +54,11 @@ $(TESTS_DIR)/bin :
 
 
 $(TESTS_DIR)/bin/% : $(TESTS_DIR)/%.c
-	@$(CC) $(CFLAGS) $< $(OBJ_FILES_PATHS) -o $@ -lcriterion -lm
-
+	@if grep -q "criterion" $<; then \
+		$(CC) $(CFLAGS) $< $(OBJ_FILES_PATHS) -o $@ -lcriterion -lm ; \
+	elif grep -q "cgreen" $<; then \
+		$(CC) $(CFLAGS) $< $(OBJ_FILES_PATHS) -o $@ -lcgreen -lm ; \
+	fi
 
 
 
