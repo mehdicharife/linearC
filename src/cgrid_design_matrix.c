@@ -86,12 +86,13 @@ nominal_data_type* cgrid_design_matrix_get_val_of_nominal_feature(design_matrix*
 
 
 size_t get_statistical_data_type_count(cgrid_design_matrix* pmatrix, statistical_data_type type) {
+    size_t count = 0;
     for(size_t k = 0; k < pmatrix->pgrid->col_count; k++) {
-        if(get_jth_statistical_feature_col_index(pmatrix, type, k) == -1) {
-            return k;
+        if(pmatrix->get_col_statistical_data_type(pmatrix, k) == type) {
+            count++;
         }
     }
-    return pmatrix->pgrid->col_count;
+    return count;
 }
 
 
