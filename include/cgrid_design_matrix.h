@@ -26,6 +26,8 @@ struct cgrid_design_matrix {
     element_type_val_to_double_converter* pto_double_converter;
     element_type_val_to_int_converter* pto_int_converter;
     element_type_val_to_string_converter* pto_string_converter;
+
+    statistical_data_type (*get_col_statistical_data_type)(cgrid_design_matrix* pmatrix, size_t col_index);
 };
 
 design_matrix* new_cgrid_design_matrix(matrix* pmatrix, element_type_to_statistical_type_mapper* pmapper);
@@ -33,7 +35,7 @@ continuous_data_type* cgrid_design_matrix_get_val_of_continuous_feature(design_m
 count_data_type* cgrid_design_matrix_get_val_of_count_feature(design_matrix* pdmatrix, size_t sample_index, size_t feature_index);
 nominal_data_type* cgrid_design_matrix_get_val_of_nominal_feature(design_matrix* pdmatrix, size_t sample_index, size_t feature_index);
 
-int get_jth_statistical_feature_index_of_type(cgrid_design_matrix* pmatrix, statistical_data_type ptype, size_t j);
+
 
 
 

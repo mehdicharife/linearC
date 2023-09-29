@@ -2,12 +2,15 @@
 #include <cgreen/mocks.h>
 #include "../include/cgrid_design_matrix.h"
 
-statistical_data_type get_statistical_data_type_of_col(cgrid_design_matrix* pmatrix, size_t col_index);
+//TestSuite* cgrid_design_matrix_jth_statistical_feature_col_index_getter_test_suite();
 
-element_type_to_statistical_type_mapper* stub_mapper;
-matrix* cgrid_stub;
-type_distribution* pdistr;
-cgrid_design_matrix* pmatrix;
+
+statistical_data_type get_col_statistical_data_type(cgrid_design_matrix* pmatrix, size_t col_index);
+
+static element_type_to_statistical_type_mapper* stub_mapper;
+static matrix* cgrid_stub;
+static type_distribution* pdistr;
+static cgrid_design_matrix* pmatrix;
 
 element_type* get_cell_type_stub(type_distribution* pdistr, size_t row, size_t col) {
     return (element_type*) mock(pdistr, row, col);
@@ -49,28 +52,26 @@ Describe(CGridDesignMatrixColStatsTypeGetter);
 BeforeEach(CGridDesignMatrixColStatsTypeGetter) { my_setup(); }
 AfterEach(CGridDesignMatrixColStatsTypeGetter) { }
 
-
 Ensure(CGridDesignMatrixColStatsTypeGetter, returns_mapped_statistical_data_type_if_overriding_type_is_undefined) {
     expect(get_cell_type_stub, when(col, is_equal_to(1)), will_return(new_double_element_type()));
     
     expect(visit_double_stub, when(ptype, is_equal_to(new_double_element_type())));
     
-    get_statistical_data_type_of_col(pmatrix, 1);
+    get_col_statistical_data_type(pmatrix, 1);
 }
-
 
 Ensure(CGridDesignMatrixColStatsTypeGetter, returns_immediately_if_overriding_statistical_data_type_is_not_undefined) {
     pmatrix->statistical_types[0] = continuous;
     never_expect(get_cell_type_stub);
     never_expect(visit_double_stub);
-    get_statistical_data_type_of_col(pmatrix, 0);
+    get_col_statistical_data_type(pmatrix, 0);
 }
 
 
 
 
 
-TestSuite *cgrid_design_matrix_test_suite() {
+TestSuite *cgrid_design_matrix_column_statistical_type_getter_test_suite() {
     TestSuite *suite = create_test_suite();
     add_test_with_context(suite, 
         CGridDesignMatrixColStatsTypeGetter, 
@@ -85,10 +86,6 @@ TestSuite *cgrid_design_matrix_test_suite() {
 }
 
 
-int main(int argc, char **argv) {
-    TestSuite *suite = create_test_suite();
-    add_suite(suite, cgrid_design_matrix_test_suite());
 
-    return run_test_suite(suite, create_text_reporter());
-}
+
 
